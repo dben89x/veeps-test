@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    =display_meta_tags
+
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no", :name => "viewport"}/
+    %meta{content: "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
+    %meta{name: "robots", content:"index,follow"}
+
+    %link{rel: "stylesheet", href: "https://pro.fontawesome.com/releases/v5.0.13/css/all.css", integrity: ENV['FA_KEY'], crossorigin: "anonymous"}
+
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application'
+  %body
+    #application-container
+      = yield

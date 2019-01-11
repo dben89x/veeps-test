@@ -1,0 +1,29 @@
+// Breakpoints
+$desktop_xl_width: 3840px;
+$desktop_large_width: 2560px;
+$desktop_common_width: 1920px;
+$desktop_small_width: 1440px;
+$tablet_vertical_width: 768px;
+$tablet_vertical_width: 800px;
+$mobile_large_width: 480px;
+$mobile_common_width: 375px;
+$galaxy_width: 360px;
+$mobile_small_width: 320px;
+
+// Media queries
+$desktop_xl: "only screen and (max-width: #{$desktop_xl_width}) and (orientation: landscape)";
+$desktop_large: "only screen and (max-width: #{$desktop_large_width}) and (orientation: landscape)";
+$desktop_common: "only screen and (max-width: #{$desktop_common_width}) and (orientation: landscape)";
+$desktop_small: "only screen and (max-width: #{$desktop_small_width}) and (orientation: landscape)";
+
+$tablet_vertical: "only screen and (max-width: #{$tablet_vertical_width}) and (orientation: portrait)";
+$mobile_large: "only screen and (max-width: #{$mobile_large_width}) and (orientation: portrait)";
+$mobile_common: "only screen and (max-width: #{$mobile_common_width}) and (orientation: portrait)";
+$galaxy: "only screen and (max-width: #{$galaxy_width}) and (orientation: portrait)";
+$mobile_small: "only screen and (max-width: #{$mobile_small_width}) and (orientation: portrait)";
+
+$mobile_landscape: "screen and (min-width: 319px) and (max-width: 812px) and (orientation: landscape)";
+$tablet_landscape: "screen and (min-width: 813px) and (max-width: 1366px) and (orientation: landscape)";
+
+
+// Colors
