@@ -1,5 +1,5 @@
 module API
-  class V1::EventsController < BaseController
+  class EventsController < BaseController
 
     def create
       @event = Event.new(event_params)
