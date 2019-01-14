@@ -19,6 +19,6 @@ class Event < ApplicationRecord
   attr_accessor :file_cache
 
   def send_email
-    EventMailer.new(self).deliver_now
+    EventMailer.new_event(self).deliver_now
   end
 end

@@ -1,0 +1,7 @@
+%h1
+  ="New #{@model_name}!"
+  %hr
+
+-@columns.each do |column|
+  %b="#{column.humanize}:"
+  %p=@event[column]

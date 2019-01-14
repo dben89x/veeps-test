@@ -1,0 +1,7 @@
+="New #{@model_name}!"
+===============================================
+
+-@columns.each do |column|
+  ="#{column.humanize}:"
+  =@event[column]
+  ="-------------------"
