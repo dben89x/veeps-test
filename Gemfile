@@ -50,4 +50,3 @@ gem "meta-tags", "~> 2.11"
 gem "rack-cors", "~> 1.0"
 gem "rack-attack", "~> 5.4"
 gem 'fog', require: 'fog/aws'
-gem "aws-sdk-s3", require: false
