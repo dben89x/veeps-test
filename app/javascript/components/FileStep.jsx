@@ -9,9 +9,6 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import FormControl from '@material-ui/core/FormControl'
 import Typography from '@material-ui/core/Typography'
 
-import AWS from 'aws-sdk'
-var s3 = new AWS.S3()
-
 class FileStep extends React.Component {
   constructor(props) {
     super(props)
