@@ -8,6 +8,8 @@ import TermsStep from './TermsStep'
 
 import Button from '@material-ui/core/Button'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
+import MoodIcon from '@material-ui/icons/Mood'
+import MoodBadIcon from '@material-ui/icons/MoodBad'
 import Fab from '@material-ui/core/Fab'
 
 class HomePage extends React.Component {
@@ -16,12 +18,15 @@ class HomePage extends React.Component {
     super(props)
     this.state = {
       currentStep: 0,
+      success: false,
+      failure: false,
+      formComplete: false,
 
       ticketFunding: true,
       attendees: "",
       revenue: "",
       file: "",
-      agreed: false
+      agreed: false,
     }
   }
 
@@ -39,7 +44,6 @@ class HomePage extends React.Component {
       this.setState({[key]: state[key] })
     })
     var step = currentStep < this.stepComponents.length ? currentStep + 1 : this.props.steps.length
-
     step < this.stepComponents.length ? this.changeStep(step) : this.formComplete()
   }
 
@@ -62,17 +66,34 @@ class HomePage extends React.Component {
   formComplete = () => {
     const { ticketFunding, attendees, revenue, file, agreed} = this.state
 
-    var event = {
-      ticket_funding: ticketFunding,
-      expected_attendees: attendees,
-      expected_revenue: revenue,
-      file: file,
-      accepted_tc: agreed
-    }
-    $.post('/api/v1/events', {
-      event: event
-    }).done( data => {
-      console.log(data)
+    var formData = new FormData()
+    formData.append('event[ticket_funding]', ticketFunding)
+    formData.append('event[expected_attendees]', attendees)
+    formData.append('event[expected_revenue]', revenue)
+    formData.append('event[file]', file)
+    formData.append('event[accepted_tc]', agreed)
+
+    $.ajax({
+       url: '/api/v1/events',
+       type: 'POST',
+       data: formData,
+       processData: false,
+       contentType: false,
+       success: (data) => {
+         $(this.$stepContainer).fadeOut(300, () => {
+
+           this.setState({success: true, formComplete: true}, () => {
+             $(this.$stepContainer).fadeIn(300)
+           })
+         })
+       },
+       error: (data) => {
+         $(this.$stepContainer).fadeOut(300, () => {
+           this.setState({failure: true, formComplete: true}, () => {
+             $(this.$stepContainer).fadeIn(300)
+           })
+         })
+       }
     })
   }
 
@@ -87,21 +108,29 @@ class HomePage extends React.Component {
   }
 
   render () {
-    const {currentStep} = this.state
-
+    const {currentStep, success, failure, formComplete} = this.state
 
 
     return (
       <React.Fragment>
+        <form action="/api/v1/events" id="mainform" ref={el => this.formRef = el}></form>
         <div id="step-container" className="iflex col center">
           {currentStep > 0 ? (
-            <Fab variant="extended" className="fabs" onClick={this.previousStep}>
+            <Fab variant="extended" className={`fabs ${formComplete ? 'hide' : 'show'}`} onClick={this.previousStep}>
               <ArrowBackIosIcon/>
               Go back
             </Fab>
           ) : null }
-          <div className="steps flex col center">
+          <div className={`steps flex col center ${formComplete ? 'hide' : 'show'}`}>
             {this.stepComponents[currentStep]}
+          </div>
+          <div className={`success flex col center ${success ? 'show' : 'hide'}`}>
+            <MoodIcon/>
+            <p>Success!</p>
+          </div>
+          <div className={`failure flex col center ${failure ? 'show' : 'hide'}`}>
+            <MoodBadIcon/>
+            <p>Failure...</p>
           </div>
         </div>
       </React.Fragment>

@@ -2,7 +2,11 @@ module API
   class V1::EventsController < BaseController
 
     def create
+      pp params
       @event = Event.new(event_params)
+      # @event.file.attach(params[:file])
+      pp @event
+      puts @event.file
 
       if @event.save
         json_response(@event, :created)

@@ -14,6 +14,7 @@
 
 class Event < ApplicationRecord
   after_create :send_email
+  # has_one_attached :file
 
   mount_uploader :file, FileUploader
   attr_accessor :file_cache

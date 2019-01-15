@@ -6,12 +6,13 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails', '~> 5.1', '>= 5.1.6.1'
+gem 'rails', '~> 5.2'
 gem 'pg', '~> 1.1', '< 2.0'
 gem 'puma', '~> 3.12'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '~> 4.1'
 gem 'webpacker', "~> 3.5"
+gem 'bootsnap'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5.2'
@@ -49,3 +50,4 @@ gem "meta-tags", "~> 2.11"
 gem "rack-cors", "~> 1.0"
 gem "rack-attack", "~> 5.4"
 gem 'fog', require: 'fog/aws'
+gem "aws-sdk-s3", require: false

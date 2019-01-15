@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import $ from 'jquery'
 
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -8,12 +9,15 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import FormControl from '@material-ui/core/FormControl'
 import Typography from '@material-ui/core/Typography'
 
+import AWS from 'aws-sdk'
+var s3 = new AWS.S3()
+
 class FileStep extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       file: this.props.file,
-      valid: false
+      valid: false,
     }
   }
 
@@ -24,8 +28,9 @@ class FileStep extends React.Component {
   fileChanged = e => {
     var { target } = e
     var objectUrl = URL.createObjectURL(target.files[0])
-    this.setState({file: objectUrl}, () => {
-      console.log(this.state.file)
+
+    var file = target.files[0];
+    this.setState({file: file}, () => {
       this.checkValidity()
     })
   }
